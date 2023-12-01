@@ -35,9 +35,14 @@ define([
     }
 
     CustomerViewModel.prototype._initAllIds = function () {
-      console.log(CoreUtils.generateUniqueId());
-      console.log(CoreUtils.generateUniqueId());
-      this.inputFirstNameId = 'input-first-name';
+      // console.log(CoreUtils.generateUniqueId());
+      // console.log(CoreUtils.generateUniqueId());
+      
+      this.inputFirstNameId = CoreUtils.generateUniqueId();
+      this.inputLastNameId = CoreUtils.generateUniqueId();
+      this.inputFullNameId = CoreUtils.generateUniqueId();
+      this.inputWeightId = CoreUtils.generateUniqueId();
+      this.inputAgeId = CoreUtils.generateUniqueId();
     }
 
     CustomerViewModel.prototype._initAllLabels = function () {

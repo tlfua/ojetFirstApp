@@ -23,24 +23,24 @@
                 on-value-changed="[[onInputFirstNameValueChange]]">
   </oj-input-text>
 
-  <oj-input-text id="input-last-name"
+  <oj-input-text :id="[[inputLastNameId]]"
                 value="{{inputLastNameValue}}"
                 disabled="[[isInputLastNameDisabled]]"
                 label-hint="Last Name">
   </oj-input-text>
 
-  <oj-input-text id="input-full-name"
+  <oj-input-text :id="[[inputFullNameId]]"
                 value="{{inputFullNameValue}}"
                 disabled
                 label-hint="Full Name">
   </oj-input-text>
 
-  <oj-input-number id="input-weight"
+  <oj-input-number :id="[[inputWeightId]]"
                   label-hint="Weight"
                   value="">
   </oj-input-number>
 
-  <oj-input-number id="input-age"
+  <oj-input-number :id="[[inputAgeId]]"
                   label-hint="Age"
                   value="{{inputAgeValue}}">
   </oj-input-number>
