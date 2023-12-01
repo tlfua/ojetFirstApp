@@ -17,9 +17,9 @@
                 user-assistance-density='compact'>
 
 
-  <oj-input-text id="input-first-name" 
+  <oj-input-text :id="[[inputFirstNameId]]"
                 value="{{inputFirstNameValue}}"
-                label-hint="First Name"
+                label-hint="[[inputFirstNameLabel]]"
                 on-value-changed="[[onInputFirstNameValueChange]]">
   </oj-input-text>
 

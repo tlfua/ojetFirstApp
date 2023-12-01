@@ -22,27 +22,35 @@ define([
   )
   {
     function CustomerViewModel() {
+      this._initAllIds();
+      this._initAllLabels();
+      this._initAllObservables();
+      // console.log(this);
       
+
+    
+    }
+
+    CustomerViewModel.prototype._initAllIds = function () {
+      this.inputFirstNameId = 'input-first-name';
+    }
+
+    CustomerViewModel.prototype._initAllLabels = function () {
+      this.inputFirstNameLabel = 'First Name!';
+    }
+
+    /**
+     * @function _initAllObservables
+     * @description init all observable values
+     * 
+     */
+    CustomerViewModel.prototype._initAllObservables = function () {
       this.inputFirstNameValue = ko.observable(null);
       this.inputLastNameValue = ko.observable(null);
       this.inputFullNameValue = ko.observable(null);
       this.inputAgeValue = ko.observable(null);
       
       this.isInputLastNameDisabled = ko.observable(true);
-
-      // this.isInputFullNameDisabled = ko.computed(function () {
-      //   if (this.inputFirstNameValue() && this.inputLastNameValue()){
-      //     return false;
-      //   }
-      //   return true;
-      // }, this);
-
-      // this.inputFullNameValue = ko.computed(function () {
-      //   if (this.inputFirstNameValue() && this.inputLastNameValue()){
-      //     return `${this.inputFirstNameValue()} ${this.inputLastNameValue()}`;
-      //   }
-      //   return '';
-      // }, this);
 
       this.onInputFirstNameValueChange = function(event) {
         const value = event.detail.value;
@@ -57,13 +65,6 @@ define([
       this.inputLastNameValue.subscribe(function (_) {
         this.inputFullNameValue(`${this.inputFirstNameValue()} ${this.inputLastNameValue()}`);
       }, this);
-
-      // this.isInputLastNameDisabled = ko.computed(function () {
-      //   if (this.inputFirstNameValue()) {
-      //     return false;
-      //   }
-      //   return true;
-      // }, this);
     }
 
     /*
