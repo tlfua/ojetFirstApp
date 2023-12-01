@@ -1,0 +1,2 @@
+define(['exports', 'module', './keys-df123de6'], (function(e,i,r){"use strict";const s={row:"_83s5u9",column:"_199le7"},o={nowrap:"_4j2by2",wrap:"_15i7gv5",reverse:"_1b3zpcy",inherit:"_1hcw7et",initial:"_4hru5c"},n={direction:s,wrap:o},t=r.keys_1(s),c=r.keys_1(o),a={direction:({direction:e})=>void 0===e?{}:{class:s[e]},wrap:({wrap:e})=>void 0===e?{}:{class:o[e]}};e.directions=t,e.flexboxInterpolations=a,e.flexboxStyles=n,e.wraps=c}));
+//# sourceMappingURL=flexbox-5d7254d1.js.map

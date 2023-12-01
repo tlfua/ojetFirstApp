@@ -1,0 +1,2 @@
+define(['exports', './hooks/UNSAFE_useColorScheme', './hooks/UNSAFE_useScale', './utils/UNSAFE_interpolations/theme', './utils/UNSAFE_mergeInterpolations', './index-182af2cd'], (function(e,o,t,s,n,l){"use strict";e.useThemeInterpolations=function(){const e=o.useColorScheme(),c=t.useScale(),i=c!==l.DefaultEnvironment.scale?c:void 0,r=n.mergeInterpolations([...Object.values(s.themeInterpolations)]),{class:a}=r({colorScheme:e,scale:i});return a}}));
+//# sourceMappingURL=useThemeInterpolations-48286702.js.map

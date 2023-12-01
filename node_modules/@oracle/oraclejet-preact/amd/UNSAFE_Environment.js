@@ -1,0 +1,2 @@
+define(['exports', './index-182af2cd', 'preact', './Common', './Common/themes', './Common/themes/redwood/theme', './Common/themes/themeContract.css', 'preact/jsx-runtime', 'preact/hooks', 'preact/compat'], (function(e,o,n,t,r,m,i,c,d,s){"use strict";e.EnvironmentContext=o.EnvironmentContext,e.EnvironmentProvider=o.EnvironmentProvider,e.RootEnvironmentProvider=o.RootEnvironmentProvider,Object.defineProperty(e,"__esModule",{value:!0})}));
+//# sourceMappingURL=UNSAFE_Environment.js.map

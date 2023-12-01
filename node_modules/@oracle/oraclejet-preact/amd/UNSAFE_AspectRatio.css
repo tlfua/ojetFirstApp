@@ -1,0 +1,1 @@
+.gp6npr{position:relative;overflow-x:hidden;overflow-y:hidden;}.gp6npr::before{content:'';display:block;padding-bottom:calc(100% / (var(--oj-c-PRIVATE-DO-NOT-USE-aspect-ratio)));}.gp6npr > :first-child{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;}.gp6npr > img{object-fit:cover;}.gp6npr > video{object-fit:cover;}
