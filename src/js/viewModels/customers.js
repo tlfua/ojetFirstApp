@@ -13,12 +13,15 @@
 
 define([
   'knockout',
+  'utils/Core',
   'ojs/ojinputtext',
   'ojs/ojinputnumber',
-  'ojs/ojformlayout'
+  'ojs/ojformlayout',
+  
 ],
   function(
-    ko
+    ko,
+    CoreUtils
   )
   {
     function CustomerViewModel() {
@@ -32,6 +35,8 @@ define([
     }
 
     CustomerViewModel.prototype._initAllIds = function () {
+      console.log(CoreUtils.generateUniqueId());
+      console.log(CoreUtils.generateUniqueId());
       this.inputFirstNameId = 'input-first-name';
     }
 
