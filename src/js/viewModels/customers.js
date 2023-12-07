@@ -15,6 +15,7 @@ define([
   'ojs/ojtranslation',
   'knockout',
   'utils/Core',
+  "ojs/ojasyncvalidator-length",
   'ojs/ojinputtext',
   'ojs/ojinputnumber',
   'ojs/ojformlayout',
@@ -23,7 +24,8 @@ define([
   function(
     Translations,
     ko,
-    CoreUtils
+    CoreUtils,
+    AsyncLengthValidator
   )
   {
     // const _t = Translations.getTranslatedString;
@@ -31,6 +33,7 @@ define([
       this._initAllIds();
       this._initAllLabels();
       this._initAllObservables();
+      this._initValidators();
       // console.log(this);
       
 
@@ -80,6 +83,28 @@ define([
       this.inputLastNameValue.subscribe(function (_) {
         this.inputFullNameValue(`${this.inputFirstNameValue()} ${this.inputLastNameValue()}`);
       }, this);
+
+      // _initValidators
+      CustomerViewModel.prototype._initValidators = function () {
+        this.inputFirstNameValidators = ko.observableArray([
+          new AsyncLengthValidator({
+            min: 5,
+            max: 10,
+            countBy: 'codeUnit',
+            hint: {
+              inRange: 'Custom hint: value must have at least {min} characters but not more than {max}'
+            },
+            messageSummary: {
+              tooLong: 'Custom: Too many characters',
+              tooShort: 'Custom: Too few characters'
+            },
+            messageDetail: {
+              tooLong: 'Custom: Number of characters is too high. Enter at most {max} characters',
+              tooShort: 'Custom: Number of characters is too low. Enter at least {min} characters.'
+            }
+          })
+        ]);
+      };
     }
 
     /*

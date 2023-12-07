@@ -14,12 +14,13 @@
 <oj-form-layout id="formLayoutOptions" max-columns="3"
                 direction="row"
                 class="oj-formlayout-full-width"
-                user-assistance-density='compact'>
+                user-assistance-density='efficient'>
 
 
   <oj-input-text :id="[[inputFirstNameId]]"
                 value="{{inputFirstNameValue}}"
                 label-hint="[[inputFirstNameLabel]]"
+                validators="[[inputFirstNameValidators]]"
                 on-value-changed="[[onInputFirstNameValueChange]]">
   </oj-input-text>
 
