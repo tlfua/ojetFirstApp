@@ -12,6 +12,7 @@
     // function(accUtils) {
 
 define([
+  'ojs/ojtranslation',
   'knockout',
   'utils/Core',
   'ojs/ojinputtext',
@@ -20,10 +21,12 @@ define([
   
 ],
   function(
+    Translations,
     ko,
     CoreUtils
   )
   {
+    // const _t = Translations.getTranslatedString;
     function CustomerViewModel() {
       this._initAllIds();
       this._initAllLabels();
@@ -46,7 +49,9 @@ define([
     }
 
     CustomerViewModel.prototype._initAllLabels = function () {
+      // this.inputFirstNameLabel = _t('inputs.firstName');
       this.inputFirstNameLabel = 'First Name!';
+
     }
 
     /**
