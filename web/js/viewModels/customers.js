@@ -19,7 +19,7 @@ define([
   'ojs/ojinputtext',
   'ojs/ojinputnumber',
   'ojs/ojformlayout',
-  
+  'ojs/ojdatetimepicker'
 ],
   function(
     Translations,
@@ -32,12 +32,14 @@ define([
     function CustomerViewModel() {
       this._initAllIds();
       this._initAllLabels();
+      this._initVariables();
       this._initAllObservables();
       this._initValidators();
+      
       this.onInputFirstNameValueChange = this._onInputFirstNameValueChange.bind(this);
       this.onInputFirstNameRawValueChange = this._onInputFirstNameRawValueChange.bind(this);
       this.onInputWeightRawValueChange = this._onInputWeightRawValueChange.bind(this);
-
+      this.onInputBirthdayValueChanged = this._onInputBirthdayValueChanged.bind(this);
     
     }
 
@@ -49,6 +51,7 @@ define([
       this.inputLastNameId = CoreUtils.generateUniqueId();
       this.inputFullNameId = CoreUtils.generateUniqueId();
       this.inputWeightId = CoreUtils.generateUniqueId();
+      this.inputBirthdayId = CoreUtils.generateUniqueId();
       this.inputAgeId = CoreUtils.generateUniqueId();
     };
 
@@ -68,11 +71,13 @@ define([
       this.inputLastNameValue = ko.observable(null);
       this.inputFullNameValue = ko.observable(null);
       this.inputWeightValue = ko.observable(null);
+      this.inputBirthdayValue = ko.observable(null);
       this.inputAgeValue = ko.observable(null);
       this.isInputLastNameDisabled = ko.observable(true);
 
       // messages custom
       this.inputWeightMessagesCustom = ko.observableArray([]);
+      this.inputBirthdayMessagesCustom = ko.observableArray([this.birthdayMessage]);
 
       // disabled
       this.inputLastNameValue.subscribe(function (_) {
@@ -102,6 +107,23 @@ define([
         })
       ]);
     };
+
+    /**
+   * @function _initVariables
+   * @description Initializes all the variables.
+   */
+  CustomerViewModel.prototype._initVariables = function () {
+    const minAgeValue = this._getBirthday(18);
+
+    this.inputBirthdayMaxValue = minAgeValue; // todo: change minAgeValue to better name
+    this.birthdayMessage = {
+      detail: "the age should be > 18",
+      summary: '',
+      severity: 'error',
+    };
+
+    // this.messagesPosition = CoreUtils.toastMessagePosition();
+  };
 
     /**
      * @function _onInputFirstNameValueChange
@@ -145,6 +167,48 @@ define([
         ]);
       }
     };
+
+    /**
+     * @function _onInputBirthdayValueChanged
+     * @description Handles the input on value change event.
+     * @param {Object} event The value changed event.
+     */
+    CustomerViewModel.prototype._onInputBirthdayValueChanged = function (event) {
+      const value = event.detail.value;
+      if (value) {
+        this.inputAgeValue(this._getAge(value));
+        this.inputBirthdayMessagesCustom([]);
+      }
+      else {
+        this.inputAgeValue(null);
+        this.inputBirthdayMessagesCustom([this.birthdayMessage]);
+      }
+    };
+
+    // get age
+    CustomerViewModel.prototype._getAge = function (dateString) {
+      const today = new Date();
+      const birthDate = new Date(dateString);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      if (age < 0 || age > 120) {
+        // to fix bug as user type the first number of the year the input date sends as already done the change
+        return null;
+      }
+      return age;
+    };
+
+    // get birthday
+    CustomerViewModel.prototype._getBirthday = function (age) {
+      const today = new Date();
+      const year = today.getFullYear() - age;
+      const birthday = new Date(year, today.getMonth(), today.getDate()).toISOString();
+      return birthday.split('T')[0];
+    };
+  
 
     /*
      * Returns an instance of the ViewModel providing one instance of the ViewModel. If needed,

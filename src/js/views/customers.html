@@ -52,9 +52,18 @@
                    step="1" min="0">
   </oj-input-number>
 
+  <oj-input-date :id="[[inputBirthdayId]]"
+                 value="{{inputBirthdayValue}}"
+                 on-value-changed="[[onInputBirthdayValueChanged]]"
+                 messages-custom="[[inputBirthdayMessagesCustom]]"
+                 max="[[inputBirthdayMaxValue]]"
+                 label-hint="Input Birthday">
+    </oj-input-date>
+
   <oj-input-number :id="[[inputAgeId]]"
                   label-hint="Age"
-                  value="{{inputAgeValue}}">
+                  value="{{inputAgeValue}}"
+                  disabled>
   </oj-input-number>
 
   
@@ -63,4 +72,5 @@
 
 <span>
   <oj-bind-text value="[[inputFirstNameValue]]"></oj-bind-text>
+  <oj-bind-text value="[[inputBirthdayValue]]"></oj-bind-text>
 </span>
