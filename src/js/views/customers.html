@@ -21,8 +21,16 @@
                 value="{{inputFirstNameValue}}"
                 label-hint="[[inputFirstNameLabel]]"
                 validators="[[inputFirstNameValidators]]"
+                on-raw-value-changed="[[onInputFirstNameRawValueChange]]"
                 on-value-changed="[[onInputFirstNameValueChange]]">
   </oj-input-text>
+
+  <!-- <oj-input-text :id="[[inputFirstNameId]]"
+                value="{{inputFirstNameValue}}"
+                label-hint="[[inputFirstNameLabel]]"
+                validators="[[inputFirstNameValidators]]"
+                on-value-changed="[[onInputFirstNameValueChange]]">
+  </oj-input-text> -->
 
   <oj-input-text :id="[[inputLastNameId]]"
                 value="{{inputLastNameValue}}"
@@ -37,8 +45,11 @@
   </oj-input-text>
 
   <oj-input-number :id="[[inputWeightId]]"
-                  label-hint="Weight"
-                  value="">
+                   value="[[inputWeightValue]]"
+                   messages-custom="[[inputWeightMessagesCustom]]"
+                   on-value-changed="[[onInputWeightRawValueChange]]"
+                   label-hint="Weight"
+                   step="1" min="0">
   </oj-input-number>
 
   <oj-input-number :id="[[inputAgeId]]"

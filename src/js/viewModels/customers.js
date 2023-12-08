@@ -34,8 +34,9 @@ define([
       this._initAllLabels();
       this._initAllObservables();
       this._initValidators();
-      // console.log(this);
-      
+      this.onInputFirstNameValueChange = this._onInputFirstNameValueChange.bind(this);
+      this.onInputFirstNameRawValueChange = this._onInputFirstNameRawValueChange.bind(this);
+      this.onInputWeightRawValueChange = this._onInputWeightRawValueChange.bind(this);
 
     
     }
@@ -49,13 +50,13 @@ define([
       this.inputFullNameId = CoreUtils.generateUniqueId();
       this.inputWeightId = CoreUtils.generateUniqueId();
       this.inputAgeId = CoreUtils.generateUniqueId();
-    }
+    };
 
     CustomerViewModel.prototype._initAllLabels = function () {
       // this.inputFirstNameLabel = _t('inputs.firstName');
       this.inputFirstNameLabel = 'First Name!';
 
-    }
+    };
 
     /**
      * @function _initAllObservables
@@ -66,46 +67,84 @@ define([
       this.inputFirstNameValue = ko.observable(null);
       this.inputLastNameValue = ko.observable(null);
       this.inputFullNameValue = ko.observable(null);
+      this.inputWeightValue = ko.observable(null);
       this.inputAgeValue = ko.observable(null);
-      
       this.isInputLastNameDisabled = ko.observable(true);
 
-      this.onInputFirstNameValueChange = function(event) {
-        const value = event.detail.value;
-        if (value) {
-          this.isInputLastNameDisabled(false);
-          return;
-        }
-        this.isInputLastNameDisabled(true);
-        console.log(event);
-      }.bind(this);
+      // messages custom
+      this.inputWeightMessagesCustom = ko.observableArray([]);
 
+      // disabled
       this.inputLastNameValue.subscribe(function (_) {
         this.inputFullNameValue(`${this.inputFirstNameValue()} ${this.inputLastNameValue()}`);
       }, this);
 
-      // _initValidators
-      CustomerViewModel.prototype._initValidators = function () {
-        this.inputFirstNameValidators = ko.observableArray([
-          new AsyncLengthValidator({
-            min: 5,
-            max: 10,
-            countBy: 'codeUnit',
-            hint: {
-              inRange: 'Custom hint: value must have at least {min} characters but not more than {max}'
-            },
-            messageSummary: {
-              tooLong: 'Custom: Too many characters',
-              tooShort: 'Custom: Too few characters'
-            },
-            messageDetail: {
-              tooLong: 'Custom: Number of characters is too high. Enter at most {max} characters',
-              tooShort: 'Custom: Number of characters is too low. Enter at least {min} characters.'
-            }
-          })
+    };
+
+    // _initValidators
+    CustomerViewModel.prototype._initValidators = function () {
+      this.inputFirstNameValidators = ko.observableArray([
+        new AsyncLengthValidator({
+          min: 5,
+          max: 10,
+          countBy: 'codeUnit',
+          hint: {
+            inRange: 'Custom hint: value must have at least {min} characters but not more than {max}'
+          },
+          messageSummary: {
+            tooLong: 'Custom: Too many characters',
+            tooShort: 'Custom: Too few characters'
+          },
+          messageDetail: {
+            tooLong: 'Custom: Number of characters is too high. Enter at most {max} characters',
+            tooShort: 'Custom: Number of characters is too low. Enter at least {min} characters.'
+          }
+        })
+      ]);
+    };
+
+    /**
+     * @function _onInputFirstNameValueChange
+     * @description Handles the input on value change event.
+     * @param {Object} event The value changed event.
+     */
+    CustomerViewModel.prototype._onInputFirstNameValueChange = function (event) {
+      const value = event.detail.value;
+      if (value) {
+        this.isInputLastNameDisabled(false);
+        return;
+      }
+      this.isInputLastNameDisabled(true);
+    };
+
+    /**
+     * @function _onInputFirstNameRawValueChange
+     * @description  Handles the input on raw value change event.
+     * @param {Object} event The value changed event.
+     */
+    CustomerViewModel.prototype._onInputFirstNameRawValueChange = function (event) {
+      if (event.detail.value) {
+        event.currentTarget.validate();
+      }
+    };
+
+    /**
+     * @function _onInputWeightRawValueChange
+     * @description  Handles the input on raw value change event.
+     * @param {Object} event The value changed event.
+     */
+    CustomerViewModel.prototype._onInputWeightRawValueChange = function (event) {
+      const value = event.detail.value;
+      if (Number(value) < 40) {
+        this.inputWeightMessagesCustom([
+          {
+            detail: "you should have value >= 40",
+            summary: '',
+            severity: 'warning',
+          },
         ]);
-      };
-    }
+      }
+    };
 
     /*
      * Returns an instance of the ViewModel providing one instance of the ViewModel. If needed,
