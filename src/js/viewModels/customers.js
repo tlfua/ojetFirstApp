@@ -16,16 +16,19 @@ define([
   'knockout',
   'utils/Core',
   "ojs/ojasyncvalidator-length",
+  "ojs/ojarraydataprovider",
   'ojs/ojinputtext',
   'ojs/ojinputnumber',
   'ojs/ojformlayout',
-  'ojs/ojdatetimepicker'
+  'ojs/ojdatetimepicker',
+  "ojs/ojselectsingle"
 ],
   function(
     Translations,
     ko,
     CoreUtils,
-    AsyncLengthValidator
+    AsyncLengthValidator,
+    ArrayDataProvider
   )
   {
     // const _t = Translations.getTranslatedString;
@@ -53,6 +56,8 @@ define([
       this.inputWeightId = CoreUtils.generateUniqueId();
       this.inputBirthdayId = CoreUtils.generateUniqueId();
       this.inputAgeId = CoreUtils.generateUniqueId();
+      this.inputCountryId = CoreUtils.generateUniqueId();
+      this.inputStateId = CoreUtils.generateUniqueId();
     };
 
     CustomerViewModel.prototype._initAllLabels = function () {
@@ -73,17 +78,45 @@ define([
       this.inputWeightValue = ko.observable(null);
       this.inputBirthdayValue = ko.observable(null);
       this.inputAgeValue = ko.observable(null);
-      this.isInputLastNameDisabled = ko.observable(true);
+      this.inputCountryValue = ko.observable(null);
+      this.inputStateValue = ko.observable(null);
 
       // messages custom
       this.inputWeightMessagesCustom = ko.observableArray([]);
       this.inputBirthdayMessagesCustom = ko.observableArray([this.birthdayMessage]);
 
       // disabled
+      this.isInputLastNameDisabled = ko.observable(true);
       this.inputLastNameValue.subscribe(function (_) {
         this.inputFullNameValue(`${this.inputFirstNameValue()} ${this.inputLastNameValue()}`);
       }, this);
 
+      this.isInputStateDisabled = ko.observable(true);
+
+      // dataprovider
+      this.inputCountryDataProvider = ko.observable(
+        new ArrayDataProvider(
+          [
+            {
+              value: 1,
+              label: 'Portugal',
+            },
+            {
+              value: 2,
+              label: 'UK',
+            },
+          ],
+          {
+            keyAttributes: 'value',
+          }
+        )
+      );
+
+      this.inputStateDataProvider = ko.observable(
+        new ArrayDataProvider([], {
+          keyAttributes: 'value',
+        })
+      );
     };
 
     // _initValidators

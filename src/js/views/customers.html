@@ -57,7 +57,7 @@
                  on-value-changed="[[onInputBirthdayValueChanged]]"
                  messages-custom="[[inputBirthdayMessagesCustom]]"
                  max="[[inputBirthdayMaxValue]]"
-                 label-hint="Input Birthday">
+                 label-hint="Birthday">
     </oj-input-date>
 
   <oj-input-number :id="[[inputAgeId]]"
@@ -66,7 +66,18 @@
                   disabled>
   </oj-input-number>
 
-  
+  <oj-select-single :id="[[inputCountryId]]"
+                    value="{{inputCountryValue}}"
+                    label-hint="Country"
+                    data="[[inputCountryDataProvider]]">
+  </oj-select-single>
+
+  <oj-select-single :id="[[inputStateId]]"
+                    value="{{inputStateValue}}"
+                    label-hint="State"
+                    data="[[inputStateDataProvider]]"
+                    disabled="[[isInputStateDisabled]]">
+    </oj-select-single>
 
 </oj-form-layout>
 
