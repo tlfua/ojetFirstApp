@@ -68,6 +68,7 @@
 
   <oj-select-single :id="[[inputCountryId]]"
                     value="{{inputCountryValue}}"
+                    on-value-changed="[[onInputCountryValueChanged]]"
                     label-hint="Country"
                     data="[[inputCountryDataProvider]]">
   </oj-select-single>

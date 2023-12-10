@@ -43,6 +43,7 @@ define([
       this.onInputFirstNameRawValueChange = this._onInputFirstNameRawValueChange.bind(this);
       this.onInputWeightRawValueChange = this._onInputWeightRawValueChange.bind(this);
       this.onInputBirthdayValueChanged = this._onInputBirthdayValueChanged.bind(this);
+      this.onInputCountryValueChanged = this._onInputCountryValueChanged.bind(this);
     
     }
 
@@ -215,6 +216,57 @@ define([
       else {
         this.inputAgeValue(null);
         this.inputBirthdayMessagesCustom([this.birthdayMessage]);
+      }
+    };
+
+    /**
+     * @function _onInputCountryValueChanged
+     * @description Handles the input on value change event.
+     * @param {Object} event The value changed event.
+     */
+    CustomerViewModel.prototype._onInputCountryValueChanged = function (event) {
+      const value = event.detail.value;
+      this.inputStateValue(null); // clean the state val when each time the country val refresh
+      if (value) {
+        let statesArray;
+        if (value === 1) {
+          // portugal
+          statesArray = [
+            {
+              value: 1,
+              label: 'Lisbon',
+            },
+            {
+              value: 2,
+              label: 'Porto',
+            },
+          ];
+        } else {
+          statesArray = [
+            {
+              value: 1,
+              label: 'Manchester',
+            },
+            {
+              value: 2,
+              label: 'Liverpool',
+            },
+          ];
+        }
+
+        this.isInputStateDisabled(false);
+        this.inputStateDataProvider(
+          new ArrayDataProvider(statesArray, {
+            keyAttributes: 'value',
+          })
+        );
+      } else {
+        this.isInputStateDisabled(true);
+        this.inputStateDataProvider(
+          new ArrayDataProvider([], {
+            keyAttributes: 'value',
+          })
+        );
       }
     };
 
