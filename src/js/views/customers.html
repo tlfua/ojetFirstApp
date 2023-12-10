@@ -45,7 +45,7 @@
   </oj-input-text>
 
   <oj-input-number :id="[[inputWeightId]]"
-                   value="[[inputWeightValue]]"
+                   value="{{inputWeightValue}}"
                    messages-custom="[[inputWeightMessagesCustom]]"
                    on-value-changed="[[onInputWeightRawValueChange]]"
                    label-hint="Weight"
@@ -81,6 +81,34 @@
     </oj-select-single>
 
 </oj-form-layout>
+
+    
+
+<!-- buttons  -->
+<div
+  class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-flex-end">
+  <div class="oj-flex-item">
+
+    <oj-button on-oj-action='[[onResetButtonClick]]'
+               chroming="danger">
+      <span>
+        <oj-bind-text value="Reset">
+        </oj-bind-text>
+      </span>
+    </oj-button>
+    
+    <oj-button on-oj-action='[[onCreateButtonClick]]'
+               chroming="callToAction">
+      <span>
+        <oj-bind-text value="Create">
+        </oj-bind-text>
+      </span>
+    </oj-button>
+
+  </div>
+</div>
+<!-- buttons end -->
+
 
 <span>
   <oj-bind-text value="[[inputFirstNameValue]]"></oj-bind-text>

@@ -21,7 +21,8 @@ define([
   'ojs/ojinputnumber',
   'ojs/ojformlayout',
   'ojs/ojdatetimepicker',
-  "ojs/ojselectsingle"
+  "ojs/ojselectsingle",
+  "ojs/ojbutton"
 ],
   function(
     Translations,
@@ -45,6 +46,8 @@ define([
       this.onInputBirthdayValueChanged = this._onInputBirthdayValueChanged.bind(this);
       this.onInputCountryValueChanged = this._onInputCountryValueChanged.bind(this);
     
+      this.onCreateButtonClick = this._onCreateButtonClick.bind(this);
+      this.onResetButtonClick = this._onResetButtonClick.bind(this);
     }
 
     CustomerViewModel.prototype._initAllIds = function () {
@@ -269,6 +272,28 @@ define([
         );
       }
     };
+
+    /**
+   * @function _onCreateButtonClick
+   * @description Executed when the user click the create button.
+   * @async
+   */
+  CustomerViewModel.prototype._onCreateButtonClick = function () {
+    alert("create button pressed!"); // show alert msg in the screen
+  }
+
+  CustomerViewModel.prototype._onResetButtonClick = function () {
+    // alert("reset button pressed!");
+
+    this.inputFirstNameValue(null);
+    this.inputLastNameValue(null);
+    this.inputFullNameValue(null);
+    this.inputWeightValue(null);
+    this.inputBirthdayValue(null);
+    this.inputAgeValue(null);
+    this.inputCountryValue(null);
+    this.inputStateValue(null);
+  };
 
     // get age
     CustomerViewModel.prototype._getAge = function (dateString) {
