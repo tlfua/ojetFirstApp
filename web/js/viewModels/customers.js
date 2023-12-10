@@ -22,7 +22,8 @@ define([
   'ojs/ojformlayout',
   'ojs/ojdatetimepicker',
   "ojs/ojselectsingle",
-  "ojs/ojbutton"
+  "ojs/ojbutton",
+  "ojs/ojvalidationgroup"
 ],
   function(
     Translations,
@@ -62,6 +63,9 @@ define([
       this.inputAgeId = CoreUtils.generateUniqueId();
       this.inputCountryId = CoreUtils.generateUniqueId();
       this.inputStateId = CoreUtils.generateUniqueId();
+
+      // validation group
+      this.formValidationGroupId = CoreUtils.generateUniqueId();
     };
 
     CustomerViewModel.prototype._initAllLabels = function () {
@@ -127,7 +131,7 @@ define([
     CustomerViewModel.prototype._initValidators = function () {
       this.inputFirstNameValidators = ko.observableArray([
         new AsyncLengthValidator({
-          min: 5,
+          min: 2,
           max: 10,
           countBy: 'codeUnit',
           hint: {
@@ -279,7 +283,10 @@ define([
    * @async
    */
   CustomerViewModel.prototype._onCreateButtonClick = function () {
-    alert("create button pressed!"); // show alert msg in the screen
+    const valid = CoreUtils.checkValidationGroup(this.formValidationGroupId);
+    if (valid) {
+      alert("I am going to save"); // show alert msg in the screen
+    }
   }
 
   CustomerViewModel.prototype._onResetButtonClick = function () {

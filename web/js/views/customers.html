@@ -11,6 +11,8 @@
   </div>
 </div> -->
 
+<oj-validation-group :id="[[formValidationGroupId]]">
+
 <oj-form-layout id="formLayoutOptions" max-columns="3"
                 direction="row"
                 class="oj-formlayout-full-width"
@@ -22,7 +24,8 @@
                 label-hint="[[inputFirstNameLabel]]"
                 validators="[[inputFirstNameValidators]]"
                 on-raw-value-changed="[[onInputFirstNameRawValueChange]]"
-                on-value-changed="[[onInputFirstNameValueChange]]">
+                on-value-changed="[[onInputFirstNameValueChange]]"
+                required>
   </oj-input-text>
 
   <!-- <oj-input-text :id="[[inputFirstNameId]]"
@@ -49,7 +52,7 @@
                    messages-custom="[[inputWeightMessagesCustom]]"
                    on-value-changed="[[onInputWeightRawValueChange]]"
                    label-hint="Weight"
-                   step="1" min="0">
+                   step="1" min="0" required>
   </oj-input-number>
 
   <oj-input-date :id="[[inputBirthdayId]]"
@@ -57,7 +60,8 @@
                  on-value-changed="[[onInputBirthdayValueChanged]]"
                  messages-custom="[[inputBirthdayMessagesCustom]]"
                  max="[[inputBirthdayMaxValue]]"
-                 label-hint="Birthday">
+                 label-hint="Birthday"
+                 required>
     </oj-input-date>
 
   <oj-input-number :id="[[inputAgeId]]"
@@ -70,7 +74,8 @@
                     value="{{inputCountryValue}}"
                     on-value-changed="[[onInputCountryValueChanged]]"
                     label-hint="Country"
-                    data="[[inputCountryDataProvider]]">
+                    data="[[inputCountryDataProvider]]"
+                    required>
   </oj-select-single>
 
   <oj-select-single :id="[[inputStateId]]"
@@ -81,6 +86,8 @@
     </oj-select-single>
 
 </oj-form-layout>
+
+</oj-validation-group>
 
     
 
