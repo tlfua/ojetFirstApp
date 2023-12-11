@@ -116,8 +116,16 @@
 </div>
 <!-- buttons end -->
 
-
 <span>
   <oj-bind-text value="[[inputFirstNameValue]]"></oj-bind-text>
   <oj-bind-text value="[[inputBirthdayValue]]"></oj-bind-text>
 </span>
+
+<!-- messages  -->
+<oj-messages id="oj-messages-id"
+             class="oj-color-invert"
+             messages="[[messagesDataprovider]]"
+             display="notification"
+             position="[[messagesPosition]]">
+</oj-messages>
+<!-- messages end -->

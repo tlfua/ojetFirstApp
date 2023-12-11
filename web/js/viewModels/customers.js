@@ -23,7 +23,8 @@ define([
   'ojs/ojdatetimepicker',
   "ojs/ojselectsingle",
   "ojs/ojbutton",
-  "ojs/ojvalidationgroup"
+  "ojs/ojvalidationgroup",
+  "ojs/ojmessages"
 ],
   function(
     Translations,
@@ -92,6 +93,8 @@ define([
       // messages custom
       this.inputWeightMessagesCustom = ko.observableArray([]);
       this.inputBirthdayMessagesCustom = ko.observableArray([this.birthdayMessage]);
+
+      this.messagesDataprovider = ko.observable(new ArrayDataProvider([]));
 
       // disabled
       this.isInputLastNameDisabled = ko.observable(true);
@@ -163,7 +166,7 @@ define([
       severity: 'error',
     };
 
-    // this.messagesPosition = CoreUtils.toastMessagePosition();
+    this.messagesPosition = CoreUtils.toastMessagePosition();
   };
 
     /**
@@ -285,7 +288,17 @@ define([
   CustomerViewModel.prototype._onCreateButtonClick = function () {
     const valid = CoreUtils.checkValidationGroup(this.formValidationGroupId);
     if (valid) {
-      alert("I am going to save"); // show alert msg in the screen
+      this.messagesDataprovider(
+        new ArrayDataProvider([
+          {
+            severity: 'confirmation',
+            detail: 'Saved Successfully!',
+            timestamp: new Date().toISOString(),
+            autoTimeout: CoreUtils.getAutoTimeout(),
+          },
+        ])
+      );
+      // alert("I am going to save"); // show alert msg in the screen
     }
   }
 
