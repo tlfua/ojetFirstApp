@@ -286,6 +286,27 @@ define([
    * @async
    */
   CustomerViewModel.prototype._onCreateButtonClick = function () {
+
+    /*
+    // test the connection to Java plug-in
+    const url = '';
+
+    // Plain text data to be sent in the POST request
+    const plainTextData = "match /sales12/{saleId} { allow read: if true; allow write: if false; }";
+
+    // Options for the fetch() function, including method and headers
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain' // Specify the content type as plain text
+        // You may need to include additional headers as needed
+      },
+      body: plainTextData // Set the plain text data directly as the body
+    };
+
+    fetch(url, requestOptions);
+    */
+
     const valid = CoreUtils.checkValidationGroup(this.formValidationGroupId);
     if (valid) {
       this.messagesDataprovider(
